@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void traitementData(String result){
         Log.v("JSON", result);
+
     }
 
     public void gatherData(String url){
@@ -54,12 +56,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         MainActivity.this.result = response.toString();
                         MainActivity.this.traitementData(response.toString());
+                      
+
+
                     }
+                    //afficher dans les logcats
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
                     }
+
                 });
         mRequestQueue.add(jsonObjectRequest);
     }
