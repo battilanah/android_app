@@ -61,17 +61,17 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this.traitementData(response.toString());
                         try {
                             JSONArray jsonArray = response.getJSONArray("data");
-                            ArrayList<String> list = new ArrayList<String>();
-                            if (jsonArray != null) {
-                                int len = jsonArray.length();
-                                for (int i=0;i<len;i++){
-                                    list.add(jsonArray.get(i).toString());
-                                }
-//.....
-                                String[] myArray = list.toArray(new String[list.size()]);
-                               String a=myArray[0];
-                                Log.d("mytag",a);
+
+
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                String a= jsonArray.getJSONObject(i).getString("id");
+                                Log.d("var", a); //4th commit retrieve one component
                             }
+
+
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
