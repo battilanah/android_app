@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import com.android.volley.*;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
@@ -62,12 +65,23 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("data");
 
-
+                            
+                            List<String> list = new ArrayList<String>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 String a= jsonArray.getJSONObject(i).getString("id");
+                                list.add(a);
                                 Log.d("var", a); //4th commit retrieve one component
                             }
+
+                            ListView mListView = (ListView) findViewById(R.id.listView);
+
+                            //android.R.layout.simple_list_item_1 est une vue disponible de base dans le SDK android,
+                            //Contenant une TextView avec comme identifiant "@android:id/text1"
+
+                            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                                    android.R.layout.simple_list_item_1, list);
+                            mListView.setAdapter(adapter);
 
 
 
@@ -78,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
+
+
                     }
                     //afficher dans les logcats
                 }, new Response.ErrorListener() {
@@ -86,9 +102,12 @@ public class MainActivity extends AppCompatActivity {
                         // TODO: Handle error
                     }
 
+
                 });
         mRequestQueue.add(jsonObjectRequest);
     }
+
+}
 
 }
 
