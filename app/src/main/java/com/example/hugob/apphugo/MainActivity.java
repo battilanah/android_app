@@ -10,6 +10,8 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,7 +59,23 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         MainActivity.this.result = response.toString();
                         MainActivity.this.traitementData(response.toString());
-                      
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("data");
+                            ArrayList<String> list = new ArrayList<String>();
+                            if (jsonArray != null) {
+                                int len = jsonArray.length();
+                                for (int i=0;i<len;i++){
+                                    list.add(jsonArray.get(i).toString());
+                                }
+//.....
+                                String[] myArray = list.toArray(new String[list.size()]);
+                               String a=myArray[0];
+                                Log.d("mytag",a);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
 
                     }
