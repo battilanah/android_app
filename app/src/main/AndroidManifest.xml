@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Adapter" />
-        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".Mapactivity"></activity>
     </application>
 
 </manifest>

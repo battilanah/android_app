@@ -32,23 +32,23 @@ public class SecondActivity extends ListActivity {
 
         if(getIntent().hasExtra("json")) {
             try {
-                JSONObject donnees_poi = new JSONObject(getIntent().getStringExtra("json"));
+                JSONObject jobject = new JSONObject(getIntent().getStringExtra("json"));
 
 
-                JSONArray tableau_poi = donnees_poi.getJSONArray("data");
+                JSONArray jarray = jobject.getJSONArray("data");
 
-                for (int i=0; i < tableau_poi.length(); i++) {
+                for (int i=0; i < jarray.length(); i++) {
 
 
-                    if(tableau_poi.getJSONObject(i).get("type").toString().equals("POI")) {
+                    if(jarray.getJSONObject(i).get("type").toString().equals("POI")) {
                         map = new HashMap<String, String>();
-                        map.put("nom", tableau_poi.getJSONObject(i).get("display").toString());
-                        map.put("ville", tableau_poi.getJSONObject(i).get("city").toString());
-                        map.put("etoiles", tableau_poi.getJSONObject(i).get("stars").toString());
+                        map.put("nom", jarray.getJSONObject(i).get("display").toString());
+                        map.put("ville", jarray.getJSONObject(i).get("city").toString());
+                        map.put("etoiles", jarray.getJSONObject(i).get("stars").toString());
 
 
 
-                        map.put("img", tableau_poi.getJSONObject(i).get("media").toString());
+                        map.put("img", jarray.getJSONObject(i).get("media").toString());
                         listItem.add(map);
                     }
                 }
